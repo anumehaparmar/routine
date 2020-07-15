@@ -1,0 +1,117 @@
+<html>
+
+<head>
+  <title>
+    test
+  </title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <div class="row m-5">
+    <div class="col-md-12">
+      <div class="text-center">
+        <h1>Routine of Kabbu</h1>
+        <h3> of the house Parmar</h3>
+        <h4>first of her name</h4>
+      </div>
+    </div>
+  </div>
+  <br />
+  <br />
+
+  <div class="row m-5">
+    <div class="col-md-12">
+      <div class="text-center">
+        <h2>Right now : <span id="now"></span> </h2>
+      </div>
+    </div>
+  </div>
+  <div class="routines">
+    <ul class="timeline"></ul>
+    <div class="routine chill-1"></div>
+    <div class="routine sleep"></div>
+    <div class="routine food-br"></div>
+    <div class="routine study-1"></div>
+    <div class="routine food-lunch"></div>
+    <div class="routine chill-2"></div>
+    <div class="routine study-2"></div>
+    <div class="routine food-snacks"></div>
+    <div class="routine fam-1"></div>
+    <div class="routine food-dinner"></div>
+    <div class="routine fam-2"></div>
+    <div class="routine study-3"></div>
+    <div class="key">
+      <span class="key-sleep">Sleep</span>
+      <span class="key-study">Study</span>
+      <span class="key-family-time">Family</span>
+      <span class="key-chill">Chill</span>
+      <span class="key-food">Food</span>
+    </div>
+  </div>
+</body>
+<script>
+
+  d = new Date();
+  utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+  nd = new Date(utc + (3600000 * +5.5));
+  var hours = nd.getHours()
+  var mins = nd.getMinutes()
+  var val;
+  hours = parseInt(hours);
+  mins = parseInt(mins);
+  if (hours < 2) val = "Chill";
+  else if (hours < 9) val = "Sleep";
+  else if (hours < 10) val = "Breakfast";
+  else if (hours < 13) val = "Study!";
+  else if (hours === 13 && mins < 30) val = "Lunch";
+  else if (hours === 13) val = "Chill";
+  else if (hours === 14 && mins < 30) val = "Chill";
+  else if (hours < 17) val = "Study!";
+  else if (hours === 17 && mins < 30) val = "Snacks";
+  else if (hours < 20) val = "Family time!";
+  else if (hours < 21) val = "Dinner";
+  else if (hours < 22 && mins < 30) val = "Chill";
+  else val = "Study!";
+  console.log("IST now is : " + val + " " + hours + " " + mins);
+  $('#now').text(val);
+
+
+
+  var createTime = function (initial) {
+    for (var i = initial; i <= 12; i++) {
+      $('.timeline').append('<li><span>' + i + '</span></li>');
+    }
+  };
+
+  createTime(12);
+  createTime(1);
+  createTime(1);
+
+  function timelineSize() {
+    var width = $('.routines').width();
+    width += width / 25;
+    $('.timeline').width(width);
+    var unit_width = $('.timeline').width();
+    unit_width = unit_width / 25;
+    $('.timeline li').each(function () {
+      $(this).width(unit_width);
+    });
+  }
+
+  timelineSize();
+
+  $(window).on('resize', function () {
+    timelineSize();
+  });
+</script>
+
+</html>
